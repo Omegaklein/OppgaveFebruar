@@ -1,16 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json; // Project -> Manage NuGet Packages -> Search for Newtonsoft.Json -> Install
 
-namespace HelloWorldApp
+//Console.WriteLine("Hello, Marius og Robin!");
+
+namespace RobinOgMarius
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!dddddded");
+            ApiCaller apiCaller = new ApiCaller();
+            await apiCaller.GetCustomerByCustomerNumber();
 
-            // Print the current date and time
-            Console.WriteLine(DateTime.Now);
         }
     }
 }
