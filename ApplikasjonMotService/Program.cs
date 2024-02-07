@@ -10,6 +10,7 @@ namespace RobinOgMarius
             string token = null;
             var tokencall = new Tokencall();
 
+
             while (string.IsNullOrEmpty(token))
             {
                 token = await tokencall.CallApi();
