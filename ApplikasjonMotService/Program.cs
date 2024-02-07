@@ -9,7 +9,8 @@ namespace RobinOgMarius
     {
         static async Task Main(string[] args)
         {
-            Getcustomer apiCaller = new Getcustomer();
+            GetCustomerNumber apiCaller = new GetCustomerNumber();
+
             await apiCaller.GetCustomerByCustomerNumber();
 
         }
