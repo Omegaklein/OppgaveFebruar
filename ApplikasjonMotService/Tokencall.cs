@@ -9,7 +9,7 @@ namespace RobinOgMarius
     {
         public async Task CallApi()
         {
-            string endepunkt = "api/Customer/All";
+            string endepunkt = "Token";
             string url = $"https://vbi.okonomibistand.no/VBInterfaceOBIDev/{endepunkt}"; // URL til APIet hvor token skal hentes
             Console.WriteLine("Enter username: ");
             string username = Console.ReadLine();
