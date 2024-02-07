@@ -2,14 +2,22 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RobinOgMarius
 {
-    public class ApiCaller
+    public class CustomerInfo
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public string MobilePhone { get; set; }
+    }
+
+    public class Getcustomer
     {
         private readonly HttpClient _client;
 
-        public ApiCaller()
+        public Getcustomer()
         {
             _client = new HttpClient();
             // Assuming your bearer token is valid and you understand the security implications of hardcoding it
@@ -33,7 +41,14 @@ namespace RobinOgMarius
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(responseBody);
+                    // Deserialize the JSON response into a CustomerInfo object
+                    CustomerInfo customerInfo = JsonConvert.DeserializeObject<CustomerInfo>(responseBody);
+                    // Displaying customer information
+                    Console.WriteLine("Customer Information:");
+                    Console.WriteLine($"Name: {customerInfo.Name}");
+                    Console.WriteLine($"Id: {customerInfo.Id}");
+                    Console.WriteLine($"Mobile Phone: {customerInfo.MobilePhone}");
+                    // Add more properties as needed
                 }
                 else
                 {
