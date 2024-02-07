@@ -2,9 +2,6 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json; // Project -> Manage NuGet Packages -> Search for Newtonsoft.Json -> Install
-
-//Console.WriteLine("Hello, Marius og Robin!");
 
 namespace RobinOgMarius
 {
