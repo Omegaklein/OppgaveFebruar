@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace RobinOgMarius
 {
-    public class ApiCaller
+    public class GetCustomerNumber
     {
         private readonly HttpClient _client;
 
-        public ApiCaller()
+        public GetCustomerNumber()
         {
             _client = new HttpClient();
             // Assuming your bearer token is valid and you understand the security implications of hardcoding it
