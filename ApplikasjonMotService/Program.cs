@@ -13,22 +13,26 @@ class Program
             // Token received, you can proceed with further actions here
             Console.WriteLine("Token received successfully.");
 
-            // Call PutCustomer method
             // PutCustomer putCustomer = new PutCustomer();
             // await putCustomer.PutCustomerAsync(accessToken);
 
-            // call PutOrder method
-            // PutOrder putOrder = new PutOrder(); // Corrected class name to PutOrder
-            // await putOrder.PutOrderAsync(accessToken); // Corrected method name to PutOrderAsync
+            // PutOrder putOrder = new PutOrder();
+            // await putOrder.PutOrderAsync(accessToken);
 
-            // call putorderline
-            // putorderline putorderline = new putorderline();
+            // PutOrderLine PutOrderLine = new PutOrderLine();
+            // await PutOrderLine.PutOrderLineAsync(accessToken);
 
             // GetCustomer getCustomer = new GetCustomer();
             // await getCustomer.GetCustomerAsync(accessToken);
 
             // GetOrder getOrder = new GetOrder();
             // await getOrder.GetOrderAsync(accessToken);
+
+            // PostCustomer postCustomer = new PostCustomer();
+            // await postCustomer.PostCustomerAsync(accessToken);
+
+            // PostOrder postOrder = new PostOrder();
+            // await postOrder.PostOrderAsync(accessToken);
         }
         else
         {
