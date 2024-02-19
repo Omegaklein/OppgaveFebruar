@@ -5,27 +5,29 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        var tokencall = new Tokencall();
+        Tokencall tokencaller = new Tokencall();
+        string accessToken = await tokencaller.FetchTokenAsync();
 
-        // Prompt the user for username and password
-        Console.WriteLine("Enter username: ");
-        string username = Console.ReadLine();
-        Console.WriteLine("Enter password: ");
-        string password = Console.ReadLine();
-
-        // Fetch the token
-        string token = await tokencall.GetAccessTokenAsync(username, password);
-
-        if (token != null)
+        if (!string.IsNullOrEmpty(accessToken))
         {
-            // You can now use the token as needed
-            Console.WriteLine($"Token received: {token}");
+            // Token received, you can proceed with further actions here
+            Console.WriteLine("Token received successfully.");
 
-            // Other program logic...
+            // Call PutCustomer method
+            // PutCustomer putCustomer = new PutCustomer();
+            // await putCustomer.PutCustomerAsync(accessToken);
+
+            // call PutOrder method
+            PutOrder putOrder = new PutOrder(); // Corrected class name to PutOrder
+            await putOrder.PutOrderAsync(accessToken); // Corrected method name to PutOrderAsync
+
+            //call putorderline
+            //putorderline putorderline = new putorderline();
+
         }
         else
         {
-            Console.WriteLine("Failed to fetch token. Exiting program.");
+            Console.WriteLine("Failed to fetch token.");
         }
     }
 }

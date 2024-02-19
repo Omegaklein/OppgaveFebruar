@@ -13,12 +13,18 @@ public class Tokencall
         _httpClient = new HttpClient();
     }
 
-    public async Task<string> GetAccessTokenAsync(string username, string password)
+    public async Task<string> FetchTokenAsync()
     {
         try
         {
-            var tokenEndpoint = "https://vbi.okonomibistand.no/VBInterfaceOBIDev/Token";
-            var requestBody = $"grant_type=password&username={username}&password={password}";
+            Console.WriteLine("Enter username: ");
+            string username = Console.ReadLine();
+
+            Console.WriteLine("Enter password: ");
+            string password = Console.ReadLine();
+
+            string tokenEndpoint = "https://vbi.okonomibistand.no/VBInterfaceOBIDev/Token";
+            string requestBody = $"grant_type=password&username={username}&password={password}";
             var content = new StringContent(requestBody, Encoding.UTF8, "application/x-www-form-urlencoded");
 
             HttpResponseMessage response = await _httpClient.PostAsync(tokenEndpoint, content);
@@ -27,7 +33,9 @@ public class Tokencall
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject jsonResponse = JObject.Parse(responseBody);
 
-            return jsonResponse["access_token"].ToString();
+            string accessToken = jsonResponse["access_token"].ToString();
+            Console.WriteLine($"Token received: {accessToken}");
+            return accessToken;
         }
         catch (Exception ex)
         {
