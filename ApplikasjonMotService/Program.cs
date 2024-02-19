@@ -18,8 +18,8 @@ class Program
             // await putCustomer.PutCustomerAsync(accessToken);
 
             // call PutOrder method
-            PutOrder putOrder = new PutOrder(); // Corrected class name to PutOrder
-            await putOrder.PutOrderAsync(accessToken); // Corrected method name to PutOrderAsync
+            //PutOrder putOrder = new PutOrder(); // Corrected class name to PutOrder
+            //await putOrder.PutOrderAsync(accessToken); // Corrected method name to PutOrderAsync
 
             //call putorderline
             //putorderline putorderline = new putorderline();
