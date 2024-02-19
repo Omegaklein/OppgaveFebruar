@@ -1,40 +1,38 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 public class Tokencall
 {
-    public async Task<string> CallApi()
+    private readonly HttpClient _httpClient;
+
+    public Tokencall()
     {
-        string endepunkt = "Token";
-        string url = $"https://vbi.okonomibistand.no/VBInterfaceOBIDev/{endepunkt}";
+        _httpClient = new HttpClient();
+    }
 
-        Console.WriteLine("Enter username: ");
-        string username = Console.ReadLine();
-        Console.WriteLine("Enter password: ");
-        string password = Console.ReadLine();
-
-        using (HttpClient client = new HttpClient())
+    public async Task<string> GetAccessTokenAsync(string username, string password)
+    {
+        try
         {
-            var content = new StringContent($"grant_type=password&username={username}&password={password}", Encoding.UTF8, "application/x-www-form-urlencoded");
+            var tokenEndpoint = "https://vbi.okonomibistand.no/VBInterfaceOBIDev/Token";
+            var requestBody = $"grant_type=password&username={username}&password={password}";
+            var content = new StringContent(requestBody, Encoding.UTF8, "application/x-www-form-urlencoded");
 
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            HttpResponseMessage response = await _httpClient.PostAsync(tokenEndpoint, content);
+            response.EnsureSuccessStatusCode();
 
-            if (response.IsSuccessStatusCode)
-            {
-                string responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody); // Print the response
+            string responseBody = await response.Content.ReadAsStringAsync();
+            JObject jsonResponse = JObject.Parse(responseBody);
 
-                // Parse the JSON response
-                JObject jsonResponse = JObject.Parse(responseBody);
-                string accessToken = jsonResponse["access_token"].ToString();
-
-                return accessToken; // Return the access token
-            }
-            else
-            {
-                Console.WriteLine($"Error: {response.StatusCode}");
-                return null; // Return null if request fails
-            }
+            return jsonResponse["access_token"].ToString();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to fetch token. Error: {ex.Message}");
+            return null;
         }
     }
 }

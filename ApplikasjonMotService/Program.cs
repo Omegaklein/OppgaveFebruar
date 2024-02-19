@@ -1,53 +1,31 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace RobinOgMarius
+class Program
 {
-    class Program
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        var tokencall = new Tokencall();
+
+        // Prompt the user for username and password
+        Console.WriteLine("Enter username: ");
+        string username = Console.ReadLine();
+        Console.WriteLine("Enter password: ");
+        string password = Console.ReadLine();
+
+        // Fetch the token
+        string token = await tokencall.GetAccessTokenAsync(username, password);
+
+        if (token != null)
         {
-            string token = null;
-            var tokencall = new Tokencall();
+            // You can now use the token as needed
+            Console.WriteLine($"Token received: {token}");
 
-
-            while (string.IsNullOrEmpty(token))
-            {
-                token = await tokencall.CallApi();
-
-                if (string.IsNullOrEmpty(token))
-                {
-                    Console.WriteLine("Failed to get token. Please try again.");
-                }
-                else
-                {
-                    Console.WriteLine("Token received.");
-                }
-            }
-
-            // Ask the user what action to perform
-            Console.WriteLine("What action do you want to perform?");
-            Console.WriteLine("1. Get Customer");
-            Console.WriteLine("2. Other action");
-
-            // Read user input
-            string actionChoice = Console.ReadLine();
-
-            switch (actionChoice)
-            {
-                case "1":
-                    // Perform the action to get customer
-                    var getCustomer = new Getcustomer(token);
-                    await getCustomer.GetCustomerByCustomerNumber();
-                    break;
-                case "2":
-                    // Perform other action
-                    // Add your code here for other actions
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please choose a valid action.");
-                    break;
-            }
+            // Other program logic...
+        }
+        else
+        {
+            Console.WriteLine("Failed to fetch token. Exiting program.");
         }
     }
 }
