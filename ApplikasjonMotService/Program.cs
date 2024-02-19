@@ -24,6 +24,9 @@ class Program
             //call putorderline
             //putorderline putorderline = new putorderline();
 
+            GetCustomer getCustomer = new GetCustomer();
+            await getCustomer.GetCustomerAsync(accessToken);
+
         }
         else
         {
