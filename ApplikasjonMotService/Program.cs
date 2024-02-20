@@ -31,8 +31,8 @@ class Program
             // PostCustomer postCustomer = new PostCustomer();
             // await postCustomer.PostCustomerAsync(accessToken);
 
-            // PostOrder postOrder = new PostOrder();
-            // await postOrder.PostOrderAsync(accessToken);
+             PostOrder postOrder = new();
+             await postOrder.PostOrderAsync(accessToken);
         }
         else
         {

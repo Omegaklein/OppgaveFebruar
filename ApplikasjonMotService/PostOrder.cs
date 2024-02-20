@@ -25,10 +25,11 @@ public class PostOrder
             // Order data
             var orderData = new
             {
-                customerNo = 61045,
+                externalOrderId = "test20",
+                customerNo = 61046,
                 orderLines = new[]
                 {
-                    new { productNo = "1", quantity = 10, price = 20 }
+                    new { productNo = "1", quantity = 20, price = 20 }
                 }
             };
 
